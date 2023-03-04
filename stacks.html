@@ -1,0 +1,95 @@
+<html>
+
+<body>
+    <div id="app">
+        <span id="stack1" class="stack"></span>
+        <span id="stack2" class="stack"></span>
+
+        <br>
+        <br>
+        <br>
+        <div id="result"></div>
+    </div>
+    <div>
+        <button type="button" onclick="popStack1()">Remover da pilha 1</button>
+        <button type="button" onclick="popStack2()">Remover da pilha 2</button>
+    </div>
+    <style>
+        #stack1 {
+            margin-right: 20px;
+        }
+
+        .stack {
+            display: inline-block;
+        }
+    </style>
+
+    <script>
+        const stack1 = [];
+        const stack2 = [];
+        const toPrint = [];
+
+        const start = () => {
+            stack1.push('Zeus');
+            stack1.push('Hades');
+            stack1.push('Cibele');
+            stack1.push('Apolo');
+
+            render();
+        }
+
+        const popStack1 = () => {
+            const lastItem = stack1.pop();
+            stack2.push(lastItem);
+
+            render();
+        }
+
+        const popStack2 = () => {
+            const lastItem = stack2.pop();
+            toPrint.push(lastItem);
+
+            render();
+        }
+
+        const render = () => {
+            const stack1Element = document.querySelector("#stack1");
+            stack1Element.innerHTML = '';
+
+            //const stack2Element = document.querySelector("#stack2");
+            //stack2Element.innerHTML = '';
+
+            const resultElement = document.querySelector("#result");
+            resultElement.innerHTML = '';
+
+            renderStack1();
+            renderStack2();
+            print();
+
+            console.log(document.querySelector("#app").innerHTML)
+        }
+
+        const renderStack1 = () => {
+            const html = stack1.map(element => `<div>${element}</div>`);
+            const stack1Element = document.querySelector("#stack1");
+
+            stack1Element.innerHTML = html.reverse().join('');
+        }
+
+        const renderStack2 = () => {
+            const html = stack2.map(element => `<div>${element}</div>`);
+            const stack2Element = document.querySelector("#stack2");
+
+            stack2Element.innerHTML = html.reverse().join('');
+        }
+
+        const print = () => {
+            const resultElement = document.querySelector("#result");
+            resultElement.textContent = toPrint.join();
+        }
+
+        start();
+    </script>
+</body>
+
+</html>
